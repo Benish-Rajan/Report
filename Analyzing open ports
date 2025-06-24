@@ -1,1 +1,11 @@
 
+🔍 Port 53 – DNS (Domain Name System)
+✅ Common Use
+Port 53 is used by the DNS (Domain Name System).
+DNS translates domain names (like google.com) into IP addresses (142.250.182.206).
+It typically uses: UDP 53 for queries.
+TCP 53 for zone transfers or large queries. 
+📡 When It's Open
+If Port 53 is open on a system, it usually means:
+The system is running a DNS server, such as BIND, dnsmasq, or Windows DNS Server.
+The system might be acting as a resolver or authoritative name server. 
