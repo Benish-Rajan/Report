@@ -1,22 +1,22 @@
-1.Installed Nmap:
+- 1.Installed Nmap:
     Verified installation using nmap --version. 
-2.Found Local IP and Range 
+- 2.Found Local IP and Range 
     IP: 192.168.1.10 Subnet: /24
     IP Range: 192.168.1.0/24 
-3.Performed SYN Scan 
+- 3.Performed SYN Scan 
     sudo nmap -sS 192.168.1.0/24 
-4.Discovered Hosts & Ports 
+- 4.Discovered Hosts & Ports 
     192.168.1.1 → 80 (HTTP), 443 (HTTPS)
     192.168.1.5 → 22 (SSH)
     192.168.1.100 → 21 (FTP), 3389 (RDP) 
-5.Analyzed Packets in Wireshark
+- 5.Analyzed Packets in Wireshark
     Observed SYN requests sent to target hosts. 
-6.Common Services & Port Analysis 
+- 6.Common Services & Port Analysis 
      Port 21:  FTP – vulnerable if not secured.
      Port 22: SSH – secure if strong passwords used.
      Port 3389: RDP – common for brute-force attacks. 
-7.Security Risks Identified 
+- 7.Security Risks Identified 
      FTP without encryption → data leak risk
      RDP port open → brute-force or ransomware entry point
      Multiple open ports on one host → surface area for attack 
-8.Saved Results Text file: nmap_scan.txt
+- 8.Saved Results Text file: nmap_scan.txt
