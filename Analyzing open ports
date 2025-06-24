@@ -9,3 +9,4 @@ TCP 53 for zone transfers or large queries.
 If Port 53 is open on a system, it usually means:
 The system is running a DNS server, such as BIND, dnsmasq, or Windows DNS Server.
 The system might be acting as a resolver or authoritative name server. 
+
