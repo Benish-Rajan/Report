@@ -1,50 +1,88 @@
-🔍 Phishing Email Analysis Report
+# 🛡️ Phishing Email Analysis Report
 
+## 📌 Task Objective
+Analyze a suspicious phishing email and identify characteristics that confirm it is malicious.
 
-Email Subject: "Important Notice: Your Account Will Be Suspended"
+---
 
-Sender Address: support@amaz0n-secure.com
-Actual Company Spoofed: Amazon
+## 📧 Email Summary
 
+- **Subject**: Important Notice: Your Account Will Be Suspended
+- **Sender Email**: support@amaz0n-secure.com
+- **Claimed Brand**: Amazon
+- **Attachment**: SecurityUpdate.zip
+- **Links in Email**:
+  - Displayed: `https://amazon.com/security-update`
+  - Actual: `http://amaz0n-secure-login.ru/verify`
 
-🧩 **Phishing Indicators Identified**
-1. Sender Email Address Spoofing
-Suspicious Address: support@amaz0n-secure.com
+---
 
-Analysis: The domain uses a zero (0) instead of the letter “o” in "amazon", a common spoofing tactic.
+## 🔍 Phishing Indicators Identified
 
-Legit Domain: @amazon.com
+### 1. Sender Address Spoofing
+- **Issue**: Email is from `amaz0n-secure.com` (note the zero).
+- **Expected**: `@amazon.com`
+- **Indicator**: Typo in domain is a common spoofing method.
 
-2. Header Analysis
-Tool Used: MxToolbox Email Header Analyzer
+### 2. Header Analysis
+- **Tool Used**: [MxToolbox Email Header Analyzer](https://mxtoolbox.com/EmailHeaders.aspx)
+- **Findings**:
+  - Sender IP does not match Amazon's servers.
+  - SPF/DKIM/DMARC: **Fail**
+  - High spam score detected.
 
-Discrepancy: Sender IP does not match known Amazon IP ranges.
+### 3. Suspicious Links
+- **Displayed URL**: `https://amazon.com/security-update`
+- **Real URL (on hover)**: `http://amaz0n-secure-login.ru/verify`
+- **Issue**: Mismatch between displayed and actual link.
 
-SPF/DKIM/DMARC Failures: None of the email authentication protocols passed. Indicates spoofed sender.
+### 4. Urgent or Threatening Language
+- **Example**: "Your account will be suspended within 24 hours if no action is taken."
+- **Analysis**: Designed to induce panic and bypass rational thinking.
 
-3. Suspicious Links
-Displayed Link: https://amazon.com/security-update
+### 5. Attachment Risk
+- **Filename**: `SecurityUpdate.zip`
+- **Likely Malware**: Executable inside ZIP is a common trojan delivery method.
 
-Actual URL (on hover): http://amaz0n-secure-login.ru/verify
+### 6. Spelling & Grammar Errors
+- **Examples**:
+  - "Your acount has beeen flagged."
+  - "Click here immediatelly."
+- **Conclusion**: Poor language is typical in phishing scams.
 
-Tactic Used: Mismatched URLs – looks legitimate but redirects to a malicious Russian domain.
+---
 
-4. Urgent/Threatening Language
-Example from Email:
-"Failure to update your information within 24 hours will result in account suspension."
+## ✅ Summary of Phishing Traits
 
-Purpose: Creates panic to encourage hasty clicking.
+| No. | Indicator                    | Description |
+|-----|------------------------------|-------------|
+| 1   | Fake sender domain           | Uses lookalike domain name |
+| 2   | Failed email authentication  | SPF/DKIM/DMARC failures |
+| 3   | Link mismatch                | Hover shows different destination |
+| 4   | Urgent language              | Threatens suspension or loss |
+| 5   | Malicious attachment         | Unsolicited ZIP file |
+| 6   | Poor grammar/spelling        | Multiple typos found |
 
-5. Attachments
-File: SecurityUpdate.zip
+---
 
-Concern: Unexpected attachment, possibly malware-laced.
+## 🧠 Conclusion
 
-6. Spelling and Grammar Errors
-Examples:
+This email is **confirmed phishing**. The presence of spoofed addresses, threatening language, mismatched URLs, and failed authentication checks indicate a high risk of credential theft or malware infection.
 
-"Your acount has beeen flagged for verification."
+---
 
-"Click here immediatelly to resolve."
+## 🛠️ Tools Used
 
-Observation: Unprofessional tone, multiple typos, and grammar issues.
+- [MxToolbox](https://mxtoolbox.com/EmailHeaders.aspx) – Header analysis
+- [VirusTotal](https://www.virustotal.com/) – URL/Attachment check (optional)
+- [Whois Lookup](https://who.is/) – Domain verification
+
+---
+
+## 📝 Author
+
+**Name**: _Benish Rajan_   
+**Course**: Cybersecurity Intern  
+**Date**: June 24, 2025  
+**Institution**: _Annamalai University_
+
