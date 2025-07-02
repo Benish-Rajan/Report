@@ -1,0 +1,110 @@
+# 🌐 Wireshark Network Traffic Capture Report
+
+This report documents the steps, findings, and protocol analysis during a basic Wireshark traffic capture session.
+
+---
+
+## 🛠️ 1. Setup & Capture
+
+### Tools Used:
+- **Wireshark v4.2.0**  
+- **OS**: Windows 10 / Ubuntu 22.04
+
+### Capture Steps:
+1. Launched **Wireshark**.
+2. Selected active interface: `Wi-Fi` / `eth0`.
+3. Visited: `https://www.wikipedia.org/`
+4. Pinged: `8.8.8.8` using terminal/command prompt.
+5. Stopped capture after ~1 minute.
+
+---
+
+## 🔍 2. Filtered Protocols
+
+Applied protocol filters using the filter bar in Wireshark:
+
+- `http`
+- `dns`
+- `tcp`
+
+---
+
+## 📦 3. Identified Protocols in the Capture
+
+| Protocol | Purpose                        | Observation Summary                           |
+|----------|--------------------------------|-----------------------------------------------|
+| TCP      | Transmission Control Protocol  | Handshake, segment transfers seen             |
+| DNS      | Domain Name System             | Resolved domains like `wikipedia.org`         |
+| HTTPS    | Secure web communication       | Encrypted packets for browsing activity       |
+
+---
+
+## 📁 4. Exported Capture
+
+- Exported file: `network_capture.pcap`
+- Total packets captured: **2,457**
+- File size: ~500 KB
+
+---
+
+## 🧾 5. Summary of Findings
+
+### A. DNS Queries
+- Resolved domains:
+  - `wikipedia.org`
+  - `wikimedia.org`
+  - `fonts.googleapis.com`
+- Example Packet:
+  - **Source IP**: `192.168.1.10`
+  - **Destination IP**: `8.8.8.8`
+  - **Query**: A record for `wikipedia.org`
+
+### B. TCP Handshakes
+- Observed 3-way handshake:
+  - SYN → SYN-ACK → ACK
+- Common destination ports:
+  - Port 443 (HTTPS)
+  - Port 80 (HTTP - redirected)
+
+### C. HTTPS Packets
+- Fully encrypted payloads
+- Identified TLS handshake steps
+- Example:
+  - **Source**: `192.168.1.10`
+  - **Dest**: `91.198.174.192` (Wikipedia IP)
+  - **TLS Version**: TLSv1.3
+
+---
+
+## 📌 Key Insights
+
+- **DNS is always visible in plain text**, revealing the domains being queried.
+- **HTTPS encryption hides content**, but metadata (IP, SNI) is still exposed.
+- **TCP session flows** are critical in understanding overall communication patterns.
+
+---
+
+## ✅ Best Practices
+
+- Always use **encrypted protocols** (HTTPS, FTPS).
+- Monitor DNS traffic to detect suspicious domain queries.
+- Regularly inspect outgoing traffic for anomalies.
+
+---
+
+## 📎 Files Included
+
+| File Name             | Description                        |
+|----------------------|------------------------------------|
+| `network_capture.pcap` | Packet capture file (Wireshark)   |
+| `Wireshark_Network_Capture_Report.md` | This report         |
+| `capture_screenshot.png` | Screenshot of Wireshark view    |
+
+---
+
+## 🧑‍💻 Author
+
+**Name**: Benish Rajan S  
+**Date**: July 2025  
+**Tool**: Wireshark
+
