@@ -1,0 +1,20 @@
+🔧 Tools Used:
+  Python 3.x
+
+  pynput – For capturing keystrokes
+
+  cryptography – For AES encryption using Fernet
+
+  base64 – For encoding encrypted data
+
+  Structure:
+
+  Flask – (Optional) Localhost simulation of a server
+  encrypted_keylogger/
+│
+├── keylogger.py             # Main keylogger
+├── exfiltration_server.py   # Localhost server for simulating data exfiltration
+├── log.txt                  # Encrypted logs
+├── key.key                  # Generated encryption key
+├── README.md                # Project report
+└── startup.bat              # Persistence script (Windows only)
